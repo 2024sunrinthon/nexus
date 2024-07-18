@@ -18,7 +18,7 @@ const parser: NodeParser = async node => {
   }
   
   return createElement(
-    `${ComponentName.Typegraphy}.${targetTextStyle?.name}`,
+    `${ComponentName.Typegraphy}.${targetTextStyle.name}`,
     {
       color: paintsToHex(node.fills) ?? '#00000000',
       underline: node.textDecoration === 'UNDERLINE',

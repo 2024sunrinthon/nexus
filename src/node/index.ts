@@ -1,7 +1,7 @@
 import { Element } from '@/types/element'
 
-import textParser from './Text'
-import containerParser from './Default'
+import textParser from './Typography'
+import containerParser from './Container'
 
 export type NodeParser = (node: SceneNode) => Promise<Element> | Element
 
