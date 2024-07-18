@@ -8,9 +8,13 @@ import { parseNode } from '@/code'
 const parser: NodeParser = async node => {
   const containerProps: ContainerProps = {}
 
-  if ('fills' in node) containerProps.backgroundColor = paintsToHex(node.fills)
+  if ('fills' in node) {
+    containerProps.backgroundColor = paintsToHex(node.fills)
+  }
 
-  if ('cornerRadius' in node && Number(node.cornerRadius) > 0) containerProps.borderRadius = Number(node.cornerRadius)
+  if ('cornerRadius' in node && Number(node.cornerRadius) > 0) {
+    containerProps.borderRadius = Number(node.cornerRadius)
+  }
 
   if ('paddingLeft' in node) {
     const { paddingLeft, paddingRight, paddingTop, paddingBottom } = node
@@ -28,6 +32,15 @@ const parser: NodeParser = async node => {
       if (paddingTop && paddingTop > 0) containerProps.paddingTop = paddingTop
       if (paddingBottom && paddingBottom > 0) containerProps.paddingBottom = paddingBottom
     }
+  }
+
+  if ('strokes' in node && node.strokes.length > 0) {
+    containerProps.borderColor = paintsToHex(node.strokes)
+    containerProps.borderWidth = Number(node.strokeWeight)
+  }
+
+  if ('layoutSizingHorizontal' in node) {
+    containerProps.fullWidth = node.layoutSizingHorizontal === 'FILL'
   }
   
   containerProps.height = node.height

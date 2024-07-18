@@ -9,8 +9,12 @@ export function paintsToHex(paints: readonly Paint[] | typeof figma.mixed): stri
     case "SOLID": {
       const { r, g, b } = targetPaint.color
       const a = targetPaint.opacity ?? 1
-      return `#${Math.round(r * 255).toString(16)}${Math.round(g * 255).toString(16)}${Math.round(b * 255).toString(16)}${Math.round(a * 255).toString(16)}`
+      return `#${colorToHex(r)}${colorToHex(g)}${colorToHex(b)}${colorToHex(a)}`
     }
     default: return '#00000000'
   }
+}
+
+function colorToHex(color: number): string {
+  return Math.round(color * 255).toString(16).padStart(2, '0')
 }
