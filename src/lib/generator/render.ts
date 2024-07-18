@@ -1,5 +1,8 @@
 import { Renderable } from '@/types/common'
 import { Prop } from '@/types/element'
+import { addSpace } from '../string'
+
+const INDENT_SIZE = 2 as const
 
 export function propsToString(props: Record<string, Prop>): string {
   return Object.entries(props)
@@ -14,7 +17,7 @@ export function propsToString(props: Record<string, Prop>): string {
     .join(' ')
 }
 
-export function render(element: Renderable): string {
+export function render(element: Renderable, depth = 0): string {
   if (element === null || element === undefined) {
     return ''
   }
@@ -34,12 +37,12 @@ export function render(element: Renderable): string {
   const rawProps = propsToString(element.props)
   const props = rawProps ? ` ${rawProps}` : ''
   const children = element.children ?
-    element.children.map(render).join('') :
+    element.children.map(c => render(c, depth + 1)).join('') :
     ''
 
   return (
     children ?
-      `<${element.tag}${props}>${children}</${element.tag}>` :
-      `<${element.tag}${props} />`
+      `${addSpace(depth * INDENT_SIZE)}<${element.tag}${props}>\n${children}${addSpace(depth * INDENT_SIZE)}</${element.tag}>\n` :
+      `${addSpace(depth * INDENT_SIZE)}<${element.tag}${props} />\n`
   )
 }

@@ -1,14 +1,15 @@
 import { Element } from '@/types/element'
-import { SupportNodeType } from '@/types/node'
 
-import frameParser from './Frame'
 import textParser from './Text'
+import containerParser from './Default'
 
-export type NodeParser = (node: SupportNodeType) => Promise<Element> | Element
+export type NodeParser = (node: SceneNode) => Promise<Element> | Element
 
-export async function getParser(node: SupportNodeType) {
+export async function getParser(node: SceneNode) {
+  console.log('Node type:', node.type)
+  console.log('Container parser', containerParser)
   switch (node.type) {
-    case 'FRAME': return frameParser
-    case 'TEXT':  return textParser
+    case 'TEXT': return textParser
   }
+  return containerParser
 }

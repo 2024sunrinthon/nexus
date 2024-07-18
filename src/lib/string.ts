@@ -5,3 +5,7 @@ export function capitalizeFirstLetter(str: string): string {
 export function toLowerCase<T extends string>(str: string): Lowercase<T> {
   return str.toLowerCase() as Lowercase<T>
 }
+
+export function addSpace(count: number): string {
+  return ' '.repeat(count)
+}
