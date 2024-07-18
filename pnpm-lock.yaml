@@ -27,7 +27,7 @@ devDependencies:
     specifier: ^4.1.0
     version: 4.1.0
   typescript:
-    specifier: '*'
+    specifier: ^5.5.3
     version: 5.5.3
   webpack:
     specifier: ^5.93.0

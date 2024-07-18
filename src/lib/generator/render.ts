@@ -20,12 +20,19 @@ export function render(element: Renderable): string {
   }
   if (typeof element === 'string' || typeof element === 'number') {
     switch (typeof element) {
-      case 'string': return `{'${element.replaceAll('\n', '\\n')}'}`
+      case 'string': {
+        if (element.includes('\n')) {
+          return `{'${element.replaceAll('\n', '\\n')}'}`
+        } else {
+          return element
+        }
+      }
       case 'number': return `{${element}}`
     }
   }
 
-  const props = ` ${propsToString(element.props)}`
+  const rawProps = propsToString(element.props)
+  const props = rawProps ? ` ${rawProps}` : ''
   const children = element.children ?
     element.children.map(render).join('') :
     ''

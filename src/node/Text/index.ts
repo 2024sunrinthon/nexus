@@ -1,18 +1,32 @@
 import { createElement } from '@/lib/generator/element'
 import { NodeParser } from '..'
 import { isExpectNode } from '@/lib/guards/node'
+import { ComponentName } from '@/lib/node'
+import { TypographyProps } from '@/types/props/Typography'
+import { toLowerCase } from '@/lib/string'
+import { paintsToHex } from '@/lib/generator/color'
 
 const parser: NodeParser = async node => {
   if (!isExpectNode<TextNode>(node, 'TEXT')) {
     throw new Error('Node is not a Text')
   }
 
-  const style = figma.getStyleById(node.textStyleId.toString())
-  if (style) {
-    
+  const textStyles = await figma.getLocalTextStylesAsync()
+  const targetTextStyle = textStyles.find(style => style.id === node.textStyleId.toString())
+  if (!targetTextStyle) {
+    throw new Error(`Text style not found: ${node.textStyleId.toString()}`)
   }
-
-  return createElement('T', {}, [node.characters])
+  
+  return createElement(
+    `${ComponentName.Typegraphy}.${targetTextStyle?.name}`,
+    {
+      color: paintsToHex(node.fills) ?? '#00000000',
+      underline: node.textDecoration === 'UNDERLINE',
+      strike: node.textDecoration === 'STRIKETHROUGH',
+      textAlign: toLowerCase<'LEFT' | 'CENTER' | 'RIGHT'>(node.textAlignHorizontal)
+    } satisfies TypographyProps,
+    [node.characters]
+  )
 }
 
 export default parser

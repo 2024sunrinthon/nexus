@@ -27,9 +27,9 @@ figma.codegen.on('generate', async (e: CodegenEvent) => {
 
   return [
     {
-      title: 'Accent',
+      title: 'React Component',
       code: codeResult,
-      language: 'JAVASCRIPT'
+      language: 'TYPESCRIPT'
     }
   ]
 })
