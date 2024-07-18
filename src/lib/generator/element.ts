@@ -1,6 +1,6 @@
-import { Element, Prop } from '@/types/element'
+import { Children, Element, Prop } from '@/types/element'
 
-export function createElement(tag: string, props: Record<string, Prop>, children: Element[]): Element {
+export function createElement(tag: string, props: Record<string, Prop>, children: Children[]): Element {
   return {
     tag,
     props,

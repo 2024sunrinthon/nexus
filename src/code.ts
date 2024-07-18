@@ -1,3 +1,4 @@
+import { render } from './lib/generator/render'
 import { isSupportNode } from './lib/guards/node'
 import { getParser } from './node'
 // import { format } from 'prettier/standalone'
@@ -5,7 +6,8 @@ import { getParser } from './node'
 async function parseNode(node: SceneNode): Promise<string> {
   if (isSupportNode(node)) {
     const parser = await getParser(node)
-    const element = parser(node)
+    const element = await parser(node)
+    return render(element)
   }
   return ''
 }

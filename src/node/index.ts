@@ -1,14 +1,14 @@
-import { capitalizeFirstLetter } from '@/lib/string'
+import { Element } from '@/types/element'
 import { SupportNodeType } from '@/types/node'
 
-export type NodeParser<T extends SceneNode> = (node: T) => Promise<string> | string
+import frameParser from './Frame'
+import textParser from './Text'
 
-export async function getParser(node: SupportNodeType): Promise<NodeParser<SupportNodeType>> {
-  const validNodeType = capitalizeFirstLetter(node.type.toLowerCase())
-  const { default: parser } = await import(`./${validNodeType}}/index.js`)
-  if (!parser) {
-    throw new Error(`Parser for node type "${node.type}" not found`)
+export type NodeParser = (node: SupportNodeType) => Promise<Element> | Element
+
+export async function getParser(node: SupportNodeType) {
+  switch (node.type) {
+    case 'FRAME': return frameParser
+    case 'TEXT':  return textParser
   }
-
-  return parser
 }

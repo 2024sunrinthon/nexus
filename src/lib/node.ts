@@ -1,4 +1,4 @@
-export const nodeTypes: readonly NodeType[] = [
+export const nodeTypes: NodeType[] = [
   'FRAME',
   'TEXT'
-] as const
+]
