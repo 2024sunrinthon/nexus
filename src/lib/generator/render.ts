@@ -25,9 +25,9 @@ export function render(element: Renderable, depth = 0): string {
     switch (typeof element) {
       case 'string': {
         if (element.includes('\n')) {
-          return `{'${element.replaceAll('\n', '\\n')}'}`
+          return `${addSpace(depth * INDENT_SIZE)}{'${element.replaceAll('\n', '\\n')}'}\n`
         } else {
-          return element
+          return `${addSpace(depth * INDENT_SIZE)}{'${element}'}\n`
         }
       }
       case 'number': return `{${element}}`
