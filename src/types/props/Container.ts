@@ -1,4 +1,4 @@
-export interface ContainerProps {
+export type ContainerProps = {
   backgroundColor?: string
   borderRadius?: number
   paddingLeft?: number
@@ -12,5 +12,4 @@ export interface ContainerProps {
   borderColor?: string
   fullWidth?: boolean
   height?: number
-  style?: Record<string, string>
 }

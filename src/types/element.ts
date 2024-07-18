@@ -1,4 +1,4 @@
-export type Prop = string | number | boolean | unknown[] | Record<string, unknown> | null | undefined
+export type Prop = string | number | boolean | null | undefined
 export type Children = Element | string | number | null | undefined
 
 export interface Element {

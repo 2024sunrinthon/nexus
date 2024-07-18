@@ -6,6 +6,7 @@ const INDENT_SIZE = 2 as const
 
 export function propsToString(props: Record<string, Prop>): string {
   return Object.entries(props)
+    .filter(([_, value]) => value !== null && value !== undefined)
     .map(([key, value]) => {
       switch (typeof value) {
         case 'string': return `${key}="${value}"`

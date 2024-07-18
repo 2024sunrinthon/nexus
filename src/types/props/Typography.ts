@@ -1,4 +1,4 @@
-export interface TypographyProps {
+export type TypographyProps = {
   color?: string
   underline?: boolean
   strike?: boolean
