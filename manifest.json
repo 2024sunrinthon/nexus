@@ -1,0 +1,22 @@
+{
+  "name": "nexus",
+  "id": "1329871678173899746",
+  "api": "1.0.0",
+  "main": "./dist/code.js",
+  "capabilities": [
+    "inspect",
+    "codegen"
+  ],
+  "codegenLanguages": [
+    {"label": "React", "value": "react"}
+  ],
+  "enableProposedApi": false,
+  "editorType": [
+    "dev"
+  ],
+  "networkAccess": {
+    "allowedDomains": [
+      "none"
+    ]
+  }
+}

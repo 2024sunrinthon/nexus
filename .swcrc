@@ -1,0 +1,17 @@
+{
+  "$schema": "https://swc.rs/schema.json",
+  "jsc": {
+    "target": "es5",
+    "minify": {
+      "mangle": true,
+      "compress": {
+        "passes": 2
+      }
+    },
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "dynamicImport": false
+    }
+  }
+}
