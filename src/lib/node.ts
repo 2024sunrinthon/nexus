@@ -1,8 +1,12 @@
 export const nodeTypes: NodeType[] = [
-  'TEXT'
+  'TEXT',
+  'FRAME'
 ]
 
 export const enum ComponentName {
   Typegraphy = 'Typography',
-  Container = 'Container'
+  Container = 'Container',
+  Flex = 'Flex',
+  Row = 'Row',
+  Column = 'Column'
 }

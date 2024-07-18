@@ -4,13 +4,14 @@ import containerParser from '../Container'
 import { createElement } from '@/lib/generator/element'
 import { parseNode } from '@/code'
 import { FlexProps } from '@/types/props/Flex'
+import { ComponentName } from '@/lib/node'
 
 const parser: NodeParser = async node => {
-  if (!isExpectNode<FrameNode>(node, 'FRAME') || node.layoutMode === 'NONE') {
-    return containerParser(node)
-  }
-
   const container = await containerParser(node)
+  if (!isExpectNode<FrameNode>(node, 'FRAME') || node.layoutMode === 'NONE') {
+    return container
+  }
+  
   const flexProps: FlexProps = {
     ...container.props,
   }
@@ -41,7 +42,7 @@ const parser: NodeParser = async node => {
   }
 
   return createElement(
-    'Flex',
+    ComponentName.Flex,
     flexProps,
     await Promise.all(node.children.map(child => parseNode(child)))
   )
