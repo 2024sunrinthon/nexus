@@ -8,7 +8,7 @@ export async function paintsToColor(paints: readonly Paint[] | typeof figma.mixe
   }
 
   switch (targetPaint.type) {
-    case "SOLID": {
+    case 'SOLID': {
       if (targetPaint.boundVariables) {
         const variableAlias = targetPaint.boundVariables.color
         const variable = await figma.variables.getVariableByIdAsync(variableAlias?.id ?? '')
@@ -21,7 +21,6 @@ export async function paintsToColor(paints: readonly Paint[] | typeof figma.mixe
       const a = targetPaint.opacity ?? 1
       return `#${colorToHex(r)}${colorToHex(g)}${colorToHex(b)}${colorToHex(a)}`
     }
-    default: return '#00000000'
   }
 }
 

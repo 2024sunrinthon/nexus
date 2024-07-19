@@ -19,9 +19,7 @@ export async function getParser(node: SceneNode) {
         default: return flexParser
       }
     }
-    case 'GROUP': {
-      return iconParser
-    }
+    case 'GROUP': return iconParser
   }
   return containerParser
 }
