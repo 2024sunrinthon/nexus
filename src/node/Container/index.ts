@@ -4,6 +4,7 @@ import { createElement } from '@/lib/generator/element'
 import { ContainerProps } from '@/types/props/Container'
 import { paintsToHex } from '@/lib/generator/color'
 import { parseNode } from '@/code'
+import { hasCornerRadius, hasStroke } from '@/lib/guards/property'
 
 const parser: NodeParser = async node => {
   const containerProps: ContainerProps = {}
@@ -12,8 +13,12 @@ const parser: NodeParser = async node => {
     containerProps.backgroundColor = paintsToHex(node.fills)
   }
 
-  if ('cornerRadius' in node && Number(node.cornerRadius) > 0) {
-    containerProps.borderRadius = Number(node.cornerRadius)
+  if (hasCornerRadius(node)) {
+    if (node.cornerRadius === figma.mixed) {
+      containerProps.borderRadius = node.topLeftRadius
+    } else {
+      containerProps.borderRadius = node.cornerRadius
+    }
   }
 
   if ('paddingLeft' in node) {
@@ -34,9 +39,13 @@ const parser: NodeParser = async node => {
     }
   }
 
-  if ('strokes' in node && node.strokes.length > 0) {
+  if (hasStroke(node) && node.strokes.length > 0) {
     containerProps.borderColor = paintsToHex(node.strokes)
-    containerProps.borderWidth = Number(node.strokeWeight)
+    if (node.strokeWeight === figma.mixed) {
+      containerProps.borderWidth = node.topLeftRadius
+    } else {
+      containerProps.borderWidth = node.strokeWeight
+    }
   }
 
   if ('layoutSizingHorizontal' in node) {

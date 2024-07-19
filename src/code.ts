@@ -4,9 +4,7 @@ import { Element } from './types/element'
 
 export async function parseNode(node: SceneNode): Promise<Element> {
   const parser = await getParser(node)
-  console.log('Parser:', parser)
   const element = await parser(node)
-  console.log('Element:', element)
   return element
 }
 

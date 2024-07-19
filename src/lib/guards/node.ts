@@ -2,7 +2,6 @@ import { NodeTypeMap, SupportNodeType } from '@/types/node'
 import { nodeTypes } from '../node'
 
 export function isSupportNode(node: SceneNode): node is SupportNodeType {
-  console.log('Check node', node.type)
   return nodeTypes.includes(node.type)
 }
 
