@@ -14,11 +14,14 @@ const parser: NodeParser = async node => {
   }
 
   if (hasCornerRadius(node)) {
+    let cornerRadius: number
     if (node.cornerRadius === figma.mixed) {
-      containerProps.borderRadius = node.topLeftRadius
+      cornerRadius = node.topLeftRadius
     } else {
-      containerProps.borderRadius = node.cornerRadius
+      cornerRadius = node.cornerRadius
     }
+
+    containerProps.borderRadius = cornerRadius > 0 ? cornerRadius : undefined
   }
 
   if ('paddingLeft' in node) {

@@ -14,9 +14,24 @@ export function propsToString(props: Record<string, Prop>): string {
 
       switch (typeof value) {
         case 'string': return `${key}="${value}"`
-        case 'number':
+        case 'number': {
+          const fixedValue = value.toFixed(2)
+          const floatPart = fixedValue.split('.')[1]
+          if (floatPart === '00') {
+            return `${key}={${value}}`
+          } else if (floatPart.slice(-1) === '0') {
+            return `${key}={${fixedValue.slice(0, -1)}}`
+          }
+          return `${key}={${fixedValue}}`
+        }
         case 'boolean': return `${key}={${value}}`
-        case 'object': return `${key}={colors.${value.name.replaceAll('-', '').replaceAll(' ', '')}}`
+        case 'object': {
+          const variableName = value.name
+            .replaceAll('-', '')
+            .replaceAll('+', '')
+            .replaceAll(' ', '')
+          return `${key}={colors.${variableName}}`
+        }
         default: return `${key}={${value}}`
       }
     })
