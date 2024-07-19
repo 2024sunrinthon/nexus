@@ -34,11 +34,15 @@ const parser: NodeParser = async node => {
     } else if (paddingVertical || paddingHorizontal) {
       if (paddingVertical && paddingVertical > 0) containerProps.paddingVertical = paddingVertical
       if (paddingHorizontal && paddingHorizontal > 0) containerProps.paddingHorizontal = paddingHorizontal
-    } else {
-      if (paddingLeft && paddingLeft > 0) containerProps.paddingLeft = paddingLeft
-      if (paddingRight && paddingRight > 0) containerProps.paddingRight = paddingRight
+    }
+
+    if (!containerProps.paddingVertical) {
       if (paddingTop && paddingTop > 0) containerProps.paddingTop = paddingTop
       if (paddingBottom && paddingBottom > 0) containerProps.paddingBottom = paddingBottom
+    }
+    if (!containerProps.paddingHorizontal) {
+      if (paddingLeft && paddingLeft > 0) containerProps.paddingLeft = paddingLeft
+      if (paddingRight && paddingRight > 0) containerProps.paddingRight = paddingRight
     }
   }
 
