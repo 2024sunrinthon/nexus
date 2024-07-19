@@ -42,6 +42,9 @@ const parser: NodeParser = async node => {
   if ('layoutSizingHorizontal' in node) {
     containerProps.fullWidth = node.layoutSizingHorizontal === 'FILL'
   }
+  if (!containerProps.fullWidth) {
+    containerProps.width = node.width
+  }
   
   containerProps.height = node.height
 

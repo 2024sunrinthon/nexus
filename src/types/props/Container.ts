@@ -11,5 +11,6 @@ export type ContainerProps = {
   borderWidth?: number
   borderColor?: string
   fullWidth?: boolean
+  width?: number
   height?: number
 }

@@ -13,12 +13,9 @@ const parser: NodeParser = async node => {
 
   const textStyles = await figma.getLocalTextStylesAsync()
   const targetTextStyle = textStyles.find(style => style.id === node.textStyleId.toString())
-  if (!targetTextStyle) {
-    throw new Error(`Text style not found: ${node.textStyleId.toString()}`)
-  }
   
   return createElement(
-    `${ComponentName.Typegraphy}.${targetTextStyle.name}`,
+    `${ComponentName.Typegraphy}.${targetTextStyle?.name || 'Body'}`,
     {
       color: paintsToHex(node.fills) ?? '#00000000',
       underline: node.textDecoration === 'UNDERLINE',
