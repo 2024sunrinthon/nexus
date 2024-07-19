@@ -31,7 +31,9 @@ const parser: NodeParser = async node => {
     default: flexProps.alignItems = 'flex-start'; break
   }
 
-  flexProps.flexWrap = node.layoutMode === 'HORIZONTAL' ? 'nowrap' : 'wrap'
+  if (node.layoutWrap === 'WRAP') {
+    flexProps.flexWrap = 'wrap'
+  }
 
   if (node.layoutGrow > 0) {
     flexProps.flex = node.layoutGrow
