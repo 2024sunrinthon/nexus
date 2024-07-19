@@ -1,6 +1,8 @@
 export const nodeTypes: NodeType[] = [
   'TEXT',
-  'FRAME'
+  'FRAME',
+  'GROUP',
+  'VECTOR',
 ]
 
 export const enum ComponentName {
