@@ -1,5 +1,7 @@
+import { Color } from '../color'
+
 export type TypographyProps = {
-  color?: string
+  color?: Color
   underline?: boolean
   strike?: boolean
   textAlign?: 'center' | 'left' | 'right'

@@ -8,10 +8,15 @@ export function propsToString(props: Record<string, Prop>): string {
   return Object.entries(props)
     .filter(([_, value]) => value !== null && value !== undefined && value !== false)
     .map(([key, value]) => {
+      if (value === null || value === undefined || value === false) {
+        return ''
+      }
+
       switch (typeof value) {
         case 'string': return `${key}="${value}"`
         case 'number':
         case 'boolean': return `${key}={${value}}`
+        case 'object': return `${key}={colors.${value.name.replaceAll('-', '').replaceAll(' ', '')}}`
         default: return `${key}={${value}}`
       }
     })

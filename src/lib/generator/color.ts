@@ -1,4 +1,6 @@
-export function paintsToHex(paints: readonly Paint[] | typeof figma.mixed) {
+import { Color } from '@/types/color'
+
+export async function paintsToColor(paints: readonly Paint[] | typeof figma.mixed): Promise<Color | undefined> {
   paints = Array.isArray(paints) ? paints : [paints]
   const targetPaint = paints[0]
   if (!targetPaint) {
@@ -7,6 +9,14 @@ export function paintsToHex(paints: readonly Paint[] | typeof figma.mixed) {
 
   switch (targetPaint.type) {
     case "SOLID": {
+      if (targetPaint.boundVariables) {
+        const variableAlias = targetPaint.boundVariables.color
+        const variable = await figma.variables.getVariableByIdAsync(variableAlias?.id ?? '')
+        if (variable) {
+          return variable
+        }
+      }
+
       const { r, g, b } = targetPaint.color
       const a = targetPaint.opacity ?? 1
       return `#${colorToHex(r)}${colorToHex(g)}${colorToHex(b)}${colorToHex(a)}`

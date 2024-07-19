@@ -1,5 +1,7 @@
+import { Color } from '../color'
+
 export type ContainerProps = {
-  backgroundColor?: string
+  backgroundColor?: Color
   borderRadius?: number
   paddingLeft?: number
   paddingRight?: number
@@ -9,7 +11,7 @@ export type ContainerProps = {
   paddingVertical?: number
   paddingHorizontal?: number
   borderWidth?: number
-  borderColor?: string
+  borderColor?: Color
   fullWidth?: boolean
   width?: number
   height?: number

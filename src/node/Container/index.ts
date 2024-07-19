@@ -2,7 +2,7 @@ import { ComponentName } from '@/lib/node'
 import { NodeParser } from '..'
 import { createElement } from '@/lib/generator/element'
 import { ContainerProps } from '@/types/props/Container'
-import { paintsToHex } from '@/lib/generator/color'
+import { paintsToColor } from '@/lib/generator/color'
 import { parseNode } from '@/code'
 import { hasCornerRadius, hasStroke } from '@/lib/guards/property'
 
@@ -10,7 +10,7 @@ const parser: NodeParser = async node => {
   const containerProps: ContainerProps = {}
 
   if ('fills' in node) {
-    containerProps.backgroundColor = paintsToHex(node.fills)
+    containerProps.backgroundColor = await paintsToColor(node.fills)
   }
 
   if (hasCornerRadius(node)) {
@@ -40,7 +40,7 @@ const parser: NodeParser = async node => {
   }
 
   if (hasStroke(node) && node.strokes.length > 0) {
-    containerProps.borderColor = paintsToHex(node.strokes)
+    containerProps.borderColor = await paintsToColor(node.strokes)
     if (node.strokeWeight === figma.mixed) {
       containerProps.borderWidth = node.topLeftRadius
     } else {

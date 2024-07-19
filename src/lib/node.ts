@@ -8,5 +8,6 @@ export const enum ComponentName {
   Container = 'Container',
   Flex = 'Flex',
   Row = 'Row',
-  Column = 'Column'
+  Column = 'Column',
+  Icon = 'Icon',
 }
