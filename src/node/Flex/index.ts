@@ -17,18 +17,14 @@ const parser: NodeParser = async node => {
   }
 
   switch (node.primaryAxisAlignItems) {
-    case 'MIN': flexProps.justifyContent = 'flex-start'; break
     case 'MAX': flexProps.justifyContent = 'flex-end'; break
     case 'CENTER': flexProps.justifyContent = 'center'; break
     case 'SPACE_BETWEEN': flexProps.justifyContent = 'space-between'; break
-    default: flexProps.justifyContent = 'flex-start'; break
   }
 
   switch (node.counterAxisAlignItems) {
-    case 'MIN': flexProps.alignItems = 'flex-start'; break
     case 'MAX': flexProps.alignItems = 'flex-end'; break
     case 'CENTER': flexProps.alignItems = 'center'; break
-    default: flexProps.alignItems = 'flex-start'; break
   }
 
   if (node.layoutWrap === 'WRAP') {

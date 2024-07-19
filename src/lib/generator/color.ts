@@ -1,8 +1,8 @@
-export function paintsToHex(paints: readonly Paint[] | typeof figma.mixed): string {
+export function paintsToHex(paints: readonly Paint[] | typeof figma.mixed) {
   paints = Array.isArray(paints) ? paints : [paints]
   const targetPaint = paints[0]
   if (!targetPaint) {
-    return '#00000000'
+    return undefined
   }
 
   switch (targetPaint.type) {

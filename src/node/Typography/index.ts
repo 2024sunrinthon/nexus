@@ -13,15 +13,20 @@ const parser: NodeParser = async node => {
 
   const textStyles = await figma.getLocalTextStylesAsync()
   const targetTextStyle = textStyles.find(style => style.id === node.textStyleId.toString())
+
+  const typographyProps: TypographyProps = {
+    color: paintsToHex(node.fills),
+    underline: node.textDecoration === 'UNDERLINE',
+    strike: node.textDecoration === 'STRIKETHROUGH',
+  }
+
+  if (node.textAlignHorizontal !== 'LEFT') {
+    typographyProps.textAlign = toLowerCase<'LEFT' | 'CENTER' | 'RIGHT'>(node.textAlignHorizontal)
+  }
   
   return createElement(
     `${ComponentName.Typegraphy}.${targetTextStyle?.name || 'Body'}`,
-    {
-      color: paintsToHex(node.fills) ?? '#00000000',
-      underline: node.textDecoration === 'UNDERLINE',
-      strike: node.textDecoration === 'STRIKETHROUGH',
-      textAlign: toLowerCase<'LEFT' | 'CENTER' | 'RIGHT'>(node.textAlignHorizontal)
-    } satisfies TypographyProps,
+    typographyProps,
     [node.characters]
   )
 }
